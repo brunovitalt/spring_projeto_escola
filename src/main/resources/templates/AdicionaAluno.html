@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Adiciona Aluno</title>
+</head>
+<body style="background-color: #1d2124">
+<div class="container" >
+    <div class="card" style="margin-top: 150px; background-color: #1d2124;border:1px solid #fff">
+        <h1 class="card-header" style="color: #f8f9fa; border:1px solid #fff" th:text="${id} == null ? 'Cadastrar Aluno' : 'Editar Aluno'"></h1>
+
+        <form class="form-group" method="post" th:action="@{/alunos/adicionar}"
+              th:object="${aluno}">
+            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                <div th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </div>
+            </div>
+            <div style="padding-bottom: 30px" class="text-right">
+                <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
+            </div>
+            <div class="card-body">
+                <input type="hidden" th:field="*{id}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nome" autofocus th:field="*{nome}" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Sexo</label>
+                    </div>
+                    <select th:field="*{sexo}" class="custom-select" id="inputGroupSelect01">
+                        <option th:value="Masculino" > Masculino</option>
+                        <option th:value="Feminino" >Feminino</option>
+                        <option th:value="Outro" >Outro</option>
+                    </select>
+                </div>
+
+                <div  class="input-group mb-3">
+                    <input type="date" class="form-control" placeholder="Data de Nascimento" th:field="*{dataNascimento}" />
+                </div>
+
+                <a th:href="@{/home}" class="btn btn-secondary">Voltar</a>
+                <button type="submit" class="btn btn-info" th:text="${id} == null ? 'Salvar' : 'Editar'"></button>
+            </div>
+    </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

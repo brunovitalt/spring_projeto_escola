@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <title>Adicionar Turma</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1 class="card-header" th:text="${id} == null ? 'Criar Turma' : 'Editar Turma'"></h1>
+        <form class="form-group" method="post" th:action="@{/turmas/adicionar}"
+              th:object="${turma}">
+            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                <div th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </div>
+            </div>
+            <div style="padding-bottom: 30px" class="text-right">
+                <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
+            </div>
+            <div class="card-body">
+                <input type="hidden" th:field="*{id}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nome da Turma" autofocus th:field="*{nome}" />
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Local" th:field="*{local}" />
+                </div>
+                <div style="width: 60px;" class="input-group mb-3">
+
+                      <p>Horário:</p>
+                        <select th:field="*{horario}">
+                        <option th:value="Manhã" > Manhã</option>
+                        <option th:value="Tarde" >Tarde</option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Professor" th:field="*{professor}" />
+                </div>
+                <div class="text-right">
+                    <fieldset style="border: 1px groove #ddd; padding: 20px; margin-bottom: 20px;">
+                        <select  th:field="*{listaAluno}" multiple>
+                            <option th:each="aluno : ${alunos}"
+                                    th:value="${aluno.id}"
+                                    th:utext="${aluno.nome}">
+                            </option>
+                        </select>
+                    </fieldset>
+                    <a th:href="@{/home}" class="btn btn-secondary">Voltar</a>
+                    <button type="submit" class="btn btn-info" th:text="${id} == null ? 'Salvar' : 'Editar'"></button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="text-center" >ID</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Data Nascimento</th>
+                        <th class="text-center">Sexo</th>
+                        <th class="text-center">Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <td  class="text-center" th:text="${aluno.id}"></td>
+                        <td  class="text-center" th:text="${aluno.nome}"></td>
+                        <td  class="text-center" th:text="${aluno.dataNascimento}"></td>
+                        <td  class="text-center" th:text="${aluno.sexo}" ></td>
+                        <td class="text-center">
+                            <a th:href="@{/alunos/remover/{id}(id=${aluno.id})}">
+                                <i  class="material-icons" title="Remover">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>

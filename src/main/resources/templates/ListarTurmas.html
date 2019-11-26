@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <title>Lista de Turma</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1 class="card-header">Lista de Turmas</h1>
+
+        <div class="alert alert-success" th:if="${mensagem}">
+            <span th:text="${mensagem}"></span>
+        </div>
+        <div style="padding-bottom: 30px;color: #0056b3o;" class="text-right">
+            <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Horário</th>
+                    <th class="text-center">Local</th>
+                    <th class="text-center">Professor</th>
+                    <th class="text-center">Qtd de Alunos</th>
+                    <th class="text-center" sec:authorize="hasRole('ROLE_PROFESSOR')">Excluir</th>
+                    <th class="text-center"sec:authorize="hasRole('ROLE_PROFESSOR')">Editar</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="turma : ${turmas}">
+                    <td class="text-center" th:text="${turma.nome}"></td>
+                    <td class="text-center" th:text="${turma.horario}" ></td>
+                    <td class="text-center" th:text="${turma.local}" ></td>
+                    <td class="text-center" th:text="${turma.professor}" ></td>
+                    <td class="text-center" th:text="${turma.listaAluno.size()}" ></td>
+                    <td class="text-center">
+                        <a th:href="@{/turmas/remover/{id}(id=${turma.id})}">
+                            <i sec:authorize="hasRole('ROLE_PROFESSOR')" class="material-icons" title="Remover">delete</i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a th:href="@{/turmas/editar/{id}(id=${turma.id})}">
+                            <i sec:authorize="hasRole('ROLE_PROFESSOR')" class="material-icons" title="Editar">edit</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="padding: 10px">
+                <a th:href="@{/home}" class="col-md-6">
+                    <button type="button" class="btn btn-secondary" >Voltar</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

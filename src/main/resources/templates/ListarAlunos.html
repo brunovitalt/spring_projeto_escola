@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <title>Lista de Alunos</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1 class="card-header">Alunos</h1>
+        <div class="row justify-content-center" style="padding: 10px;">
+            <h4>Listagem de alunos</h4>
+        </div>
+        <div style="padding-bottom: 30px" class="text-right">
+            <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
+        </div>
+        </div>
+        <div class="text-right">
+            <span style="padding-right: 20px" th:text="'Quantidade de alunos: ' + ${qntAlunos}"></span>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th class="text-center" >ID</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Data Nascimento</th>
+                    <th class="text-center">Sexo</th>
+                    <th class="text-center" sec:authorize="hasRole('ROLE_PROFESSOR')">Excluir</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aluno : ${alunos}">
+                    <td  class="text-center" th:text="${aluno.id}"></td>
+                    <td  class="text-center" th:text="${aluno.nome}"></td>
+                    <td  class="text-center" th:text="${aluno.dataNascimento}"></td>
+                    <td  class="text-center" th:text="${aluno.sexo}"></td>
+                    <td class="text-center">
+                        <a th:href="@{/alunos/remover/{id}(id=${aluno.id})}">
+                            <i  sec:authorize="hasRole('ROLE_PROFESSOR')" class="material-icons" title="Remover">delete</i>
+
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="padding: 10px">
+            <a th:href="@{/home}" class="col-md-6">
+                <button type="button" class="btn btn-secondary" >Voltar</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
