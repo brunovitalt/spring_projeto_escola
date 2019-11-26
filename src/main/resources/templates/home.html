@@ -1,104 +1,109 @@
 <!DOCTYPE html>
 <html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<head>
+  <head>
     <link
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
 
     <title>Home</title>
-</head>
+  </head>
 
-<body style="background-color: #1d2124">
-<div class="container-fluid">
-    <div class="card" style="margin-top: 150px; background-color: #1d2124;border:1px solid #fff">
+  <body style="background-color: #1d2124">
+    <div class="container-fluid">
+      <div
+        class="card"
+        style="margin-top: 150px; background-color: #1d2124;border:1px solid #fff"
+      >
         <div class="row justify-content-center" style="padding: 10px;">
-            <h3 style="font-size: 70px;color: #f8f9fa; border:1px solid #fff">Página Inicial</h3>
+          <h3 style="font-size: 70px;color: #f8f9fa; ">
+            Página Inicial
+          </h3>
         </div>
         <div style="padding-bottom: 30px" class="text-right">
-            <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
+          <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div
-                        style="padding: 10px; text-align: right"
-                        sec:authorize="hasRole('ROLE_PROFESSOR')"
-                >
-                    <a th:href="@{/turmas/adicionar}" class="col-md-6">
-                        <button
-                                style=" height: 100px; font-size: 50px;"
-                                type="button"
-                                class="btn btn-info"
-                                th:text="'Cadastrar Turma'"
-                        ></button>
-                    </a>
-                </div>
+          <div class="col-md-6">
+            <div
+              style="padding: 10px; text-align: right"
+              sec:authorize="hasRole('ROLE_PROFESSOR')"
+            >
+              <a th:href="@{/turmas/adicionar}" class="col-md-6">
+                <button
+                  style=" height: 100px; font-size: 50px;"
+                  type="button"
+                  class="btn btn-info"
+                  th:text="'Cadastrar Turma'"
+                ></button>
+              </a>
             </div>
+          </div>
 
-            <div class="col-md-6">
-                <div
-                        style="padding: 10px"
-                        sec:authorize="hasRole('ROLE_PROFESSOR')"
-                >
-                    <a th:href="@{/alunos/adicionar}" class="col-md-6">
-                        <button
-                                style=" height: 100px; font-size: 50px;"
-                                type="button"
-                                class="btn btn-info"
-                                th:text="'Cadastrar Aluno'"
-                        ></button>
-                    </a>
-                </div>
+          <div class="col-md-6">
+            <div
+              style="padding: 100px"
+              sec:authorize="hasRole('ROLE_PROFESSOR')"
+            >
+              <a th:href="@{/alunos/adicionar}" class="col-md-6">
+                <button
+                  style=" height: 100px; font-size: 50px;"
+                  type="button"
+                  class="btn btn-info"
+                  th:text="'Cadastrar Aluno'"
+                ></button>
+              </a>
             </div>
+          </div>
         </div>
         <div class="row">
-            <div class="col-md-6 sm">
-                <div style="padding: 10px; text-align: right">
-                    <a th:href="@{/turmas/listar}" class="col-md-6">
-                        <button
-                                style=" height: 100px; font-size: 50px;"
-                                type="button"
-                                class="btn btn-info"
-                                th:text="'Listar Turma'"
-                        ></button>
-                    </a>
-                </div>
+          <div class="col-md-6 sm">
+            <div style="padding: 10px; text-align: right">
+              <a th:href="@{/turmas/listar}" class="col-md-6">
+                <button
+                  style=" height: 100px; font-size: 50px;"
+                  type="button"
+                  class="btn btn-info"
+                  th:text="'Listar Turma'"
+                ></button>
+              </a>
             </div>
-            <div class="col-md-6">
-                <div style="padding: 10px">
-                    <a th:href="@{/alunos/listar}" class="col-md-6">
-                        <button
-                                style="height: 100px; font-size: 50px;"
-                                type="button"
-                                class="btn btn-info"
-                                th:text="'Listar Alunos'"
-                        ></button>
-                    </a>
-                </div>
+          </div>
+          <div class="col-md-6">
+            <div style="padding: 10px">
+              <a th:href="@{/alunos/listar}" class="col-md-6">
+                <button
+                  style="height: 100px; font-size: 50px;"
+                  type="button"
+                  class="btn btn-info"
+                  th:text="'Listar Alunos'"
+                ></button>
+              </a>
             </div>
+          </div>
         </div>
 
         <div class="col-md-12">
-            <div style="padding: 10px; text-align: right">
-                <a th:href="@{/logout}" class="col-md-6">
-                    <button
-                            style="height: 60px; font-size: 30px;"
-                            type="button"
-                            class="btn btn-secondary"
-                            th:text="'Sair'"
-                    ></button>
-                </a>
-            </div>
+          <div style="padding: 10px; text-align: right">
+            <a th:href="@{/logout}" class="col-md-6">
+              <button
+                style="height: 60px; font-size: 30px;"
+                type="button"
+                class="btn btn-secondary"
+                th:text="'Sair'"
+              ></button>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
