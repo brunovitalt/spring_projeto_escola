@@ -7,10 +7,10 @@
           rel="stylesheet">
     <title>Adicionar Turma</title>
 </head>
-<body>
+<body style="background-color: #1d2124">
 <div class="container">
-    <div class="card">
-        <h1 class="card-header" th:text="${id} == null ? 'Criar Turma' : 'Editar Turma'"></h1>
+    <div class="card"  style="margin-top: 150px; background-color: #1d2124;border:1px solid #fff">
+        <h1 class="card-header" style="color: #f8f9fa; border:1px solid #fff" th:text="${id} == null ? 'Criar Turma' : 'Editar Turma'"></h1>
         <form class="form-group" method="post" th:action="@{/turmas/adicionar}"
               th:object="${turma}">
             <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
@@ -18,7 +18,7 @@
                     <span th:text="${error}"></span>
                 </div>
             </div>
-            <div style="padding-bottom: 30px" class="text-right">
+            <div style="padding-bottom: 30px; padding-right: 20px; color: #f8f9fa" class="text-right">
                 <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
             </div>
             <div class="card-body">
@@ -29,15 +29,16 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Local" th:field="*{local}" />
                 </div>
-                <div style="width: 60px;" class="input-group mb-3">
 
-                      <p>Horário:</p>
-                        <select th:field="*{horario}">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Horário</label>
+                    </div>
+                    <select th:field="*{horario}" class="custom-select" id="inputGroupSelect01">
                         <option th:value="Manhã" > Manhã</option>
                         <option th:value="Tarde" >Tarde</option>
 
                     </select>
-
                 </div>
 
 
@@ -59,7 +60,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" style="color: #f8f9fa" >
                     <thead class="thead-light">
                     <tr>
                         <th class="text-center" >ID</th>

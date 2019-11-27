@@ -8,19 +8,21 @@
           rel="stylesheet">
     <title>Lista de Turma</title>
 </head>
-<body>
+<body style="background-color: #1d2124">
 <div class="container">
-    <div class="card">
-        <h1 class="card-header">Lista de Turmas</h1>
-
+    <div class="card" style="margin-top: 150px; background-color: #1d2124;border:1px solid #fff">
+        <h1 class="card-header" style="color: #f8f9fa" >Turmas</h1>
+        <div class="row justify-content-center" style="padding: 10px;">
+            <h4 style="color: #f8f9fa">Listagem de Turmas</h4>
+        </div>
         <div class="alert alert-success" th:if="${mensagem}">
             <span th:text="${mensagem}"></span>
         </div>
-        <div style="padding-bottom: 30px;color: #0056b3o;" class="text-right">
+        <div style="padding-bottom: 30px; padding-right: 20px; color: #f8f9fa" class="text-right">
             <span th:text="'Usuário Logado: ' + ${nomeUsuarioLogado}"></span>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table" style="color: #f8f9fa">
                 <thead class="thead-light">
                 <tr>
                     <th class="text-center">Nome</th>
